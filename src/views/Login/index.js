@@ -28,14 +28,14 @@ export default function Login() {
                 <div className="containerForm">
                     <div>
                         <p>Email</p>
-                        <Input placeHolder="Digite o email de acesso" className="inputLogin" onChange={(e) => setEmail(e.target.value)} type="email"/>
+                        <Input placeHolder="Digite o email de acesso" id="inputLogin" onChange={(e) => setEmail(e.target.value)} type="email"/>
                     </div>
                     <div>
                         <p>Senha</p>
-                        <Input placeHolder="Digite a senha de acesso" className="inputLogin" onChange={(e) => setPassword(e.target.value)} type="password"/>
+                        <Input placeHolder="Digite a senha de acesso" id="inputLogin" onChange={(e) => setPassword(e.target.value)} type="password"/>
                     </div>
                     
-                    <Button className="buttonLogin" onClick={() => handleSubmit()}>Entrar</Button>
+                    <Button id="buttonLogin" onClick={() => handleSubmit()}>Entrar</Button>
                     
                 </div>
             </div>
