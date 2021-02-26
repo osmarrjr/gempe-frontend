@@ -1,0 +1,27 @@
+@import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
+.sidenav---sidenav---_2tBP {
+    background: #2A6BB9;
+}
+
+.logoMenu {
+    margin-top: 25px;
+    margin-left: 9px;
+    width: 156px;
+    height: 35px;
+}
+
+.menuIcon {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.navMenu {
+    align-items: center;
+    flex: 1;
+    display: flex;
+}
+
+
