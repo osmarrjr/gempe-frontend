@@ -26,12 +26,20 @@
     display: flex;
 }
 
+#menuItemActive{
+    padding: 0.8rem;
+    cursor: pointer;
+    padding-left: 1.1rem;
+    display: flex;
+    background-color: #084B9B;
+}
+
 #menuItem:nth-child(odd){
     margin-top: 5px;
 }
 
-#menuItem:hover{
-    background-color: blue;
+#menuItemActive:nth-child(odd){
+    margin-top: 5px;
 }
 
 #menuItem:hover:focus{
@@ -47,6 +55,16 @@
     margin-top: 3px ;
 }
 
+#menuItemActive > span {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Oxygen', sans-serif;
+    font-size: 14px;
+    margin-top: 3px ;
+}
+
 .containerMenu > #menuItem{
     margin-bottom: 1.3rem;
 }
+

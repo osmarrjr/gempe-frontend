@@ -60,12 +60,12 @@ export default function Dashboard() {
     return (
         <div className="container">
             <div className="menuDashboard">
-                <SideBar />
+                <SideBar clickedDashboard={true}/>
             </div>
             <div className="cardDashboard">
                 <HeaderMenu />
                 <Row>
-                    <Input placeHolder="Busca por nome ou email" id="inputSearch"/> 
+                    <Input placeholder="Busca por nome ou email" id="inputSearch"/> 
                     <Button id="buttonSearch">Novo</Button>
                 </Row>
                 <Table className="tableDashboard" columns={columns} dataSource={data} />
