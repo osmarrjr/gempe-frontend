@@ -44,7 +44,6 @@
 }
 
 #buttonLogin {
-    width: 353px;
     height: 48px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #7228002B;
@@ -55,6 +54,10 @@
     cursor: pointer;
     transition: all .2s;
     margin-top: 10px;
+}
+
+.ant-btn > span {
+    font-size: 18px !important;
 }
 
 #buttonLogin:hover {

@@ -1,58 +1,97 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import SideBar from '../../components/SideBar';
 import HeaderMenu from '../../components/Header';
-import { Input, Button, Table, Row } from 'antd';
+import { Input, Button, Table, Row, Tooltip, Modal } from 'antd';
 import  editIcon  from '../../assets/Mask Group 61.svg';
 import  deleteIcon  from '../../assets/Mask Group 63.svg';
+import { addUser } from '../../store/actions/user.actions';
+import api from '../../services/api';
 import './styles.css';
 
 export default function Dashboard() {
-    const columns = [
-        {
-          title: 'Name',
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  function editContact(row) {
+    setName(row.name);
+    setEmail(row.email);
+    setPhone(row.phone);
+    setIsEditing(true);
+    setVisible(true);
+  }
+
+  function addNewContat() {
+    // api.post('/people', {
+    //   name: "alguem312321231",
+    //   email: "alguem312312312312@gmail.com",
+    //   phone: "12321312312333213213213"
+    // });
+    dispatch(addUser());
+  }
+
+  const columns = [
+    {
+          title: 'Nome',
           dataIndex: 'name',
           key: 'name',
         },
         {
-          title: 'Age',
-          dataIndex: 'age',
-          key: 'age',
+          title: 'E-mail',
+          dataIndex: 'email',
+          key: 'email',
         },
         {
-          title: 'Address',
-          dataIndex: 'address',
-          key: 'address',
+          title: 'Telefone',
+          key: 'phone',
+          render: (text, row, record) => {
+            return <span>{row.phone}</span>
+          }
         },
         {
-          title: 'Action',
+          title: 'Ações',
           key: 'action',
-          render: (text, record) => (
-              <Row className="buttonTable" onClick={() => console.log('teste')}>
-                  <img src={editIcon} alt="" />
-                  <img src={deleteIcon} alt="" />
-              </Row>
+          render: (text, row, record) => (
+              <Fragment >
+
+                  <Tooltip placement="top" title={'Editar Contato'}>
+                    <Button size="small" onClick={() => editContact(row)}>
+
+                      <img src={editIcon} alt="" />
+                    </Button>
+                  </Tooltip>
+                  <Tooltip tittle={'Deleter Contato'}>
+                    <Button size="small" onClick={() => {
+                      console.log(row.id)
+                    }}>
+                        
+                      <img src={deleteIcon} alt="" />
+                    </Button>
+                  </Tooltip>
+              </Fragment>
           ),
         },
       ];
 
       const data = [
         {
-          key: '1',
-          name: 'John Brown',
-          age: 32,
-          address: 'New York No. 1 Lake Park',
+          name: 'Fernanda de Araújo',
+          email: 'Fernanda.rjr@@hotmail.com',
+          phone: '43998328883',
         },
         {
-          key: '2',
-          name: 'Jim Green',
-          age: 42,
-          address: 'London No. 1 Lake Park',
+          name: 'Osmar Roncasalia',
+          email: 'osmaar.rjr@@hotmail.com',
+          phone: '43 9 9832-8883',
         },
         {
-          key: '3',
-          name: 'Joe Black',
-          age: 32,
-          address: 'Sidney No. 1 Lake Park',
+          name: 'Nathalia Dutra',
+          email: 'Nathalia.rjr@@hotmail.com',
+          phone: '43 9 9832-8883',
         },
       ];
       
@@ -66,10 +105,32 @@ export default function Dashboard() {
                 <HeaderMenu />
                 <Row>
                     <Input placeholder="Busca por nome ou email" id="inputSearch"/> 
-                    <Button id="buttonSearch">Novo</Button>
+                    <Button onClick={() => addNewContat()} id="buttonSearch">Novo</Button>
                 </Row>
                 <Table className="tableDashboard" columns={columns} dataSource={data} />
             </div>
+            <Modal
+              title={isEditing ? "Editar Usuário" : "Novo contato"}
+              onOk={()=>  (
+                setVisible(false),
+                setIsEditing(false)
+                )}
+              visible={visible}
+              onCancel={()=> (
+                setVisible(false),
+                setIsEditing(false)
+              )}
+            >
+              <div>
+                <span >Nome </span>
+                <Input onChange={(e) => setName(e.target.value) }value={name}/>
+                  <span> Email </span>
+                <Input onChange={(e) => setEmail(e.target.value)} value={email}/>
+                  <span> Telefone  </span>
+                <Input onChange={(e) => setPhone(e.target.value)} value={phone}/>
+
+              </div>
+            </Modal>
         </div>
     );
 }

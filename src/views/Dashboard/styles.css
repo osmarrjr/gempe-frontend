@@ -79,8 +79,15 @@
 }
 
 .ant-table table {
-    border-color: red;
     border: 1px solid #E4E4E4;
+}
+
+.ant-table:hover {
+    background-color: white !important;
+}
+
+.ant-table:focus{
+    background-color: white !important;
 }
 
 .tableDashboard {
@@ -96,6 +103,10 @@
 
 .ant-btn > span{
     font: normal normal normal 14px/28px 'Oxygen';
+}
+
+.ant-btn {
+    border: none !important;
 }
 
 .buttonTable > img{

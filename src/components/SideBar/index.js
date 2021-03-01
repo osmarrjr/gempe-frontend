@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.css';
 import Person from '../../assets/Mask Group 131.svg';
 import logoMenu from '../../assets/logoMenu.png';
@@ -9,20 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 
 export default function DashboardMenu({ clickedDashboard = false , clickedInfo = false }) {
-    const [isClickedContacts, setIsClickedContacts] = useState(false);
-    const [isClickedInfo, setIsClickedInfo] = useState(false);
 
     const history = useHistory();
-
-    function clickInfo () {
-        
-    }
-
-    function clickContacts () {
-        ;
-    }
-
-    console.log(clickedDashboard, clickedInfo);
 
     return (
        <div id="menuSidebar">
@@ -43,9 +31,8 @@ export default function DashboardMenu({ clickedDashboard = false , clickedInfo =
                    </div>
                </div>
 
-               <div id="menuItem">
+               <div onClick={() => history.push('/')} id="menuItem">
                     <img src={exitIcon} alt="Pes" />
-
                     <span>Sair</span>
 
                </div>

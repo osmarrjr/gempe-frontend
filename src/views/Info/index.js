@@ -1,7 +1,6 @@
 import React from 'react';
 import SideBar from '../../components/SideBar';
 import HeaderMenu from '../../components/Header';
-import { Input, Button, Table, Row } from 'antd';
 import logo from '../../assets/logo@2x.png';
 import imgAirPlane from '../../assets/Layer 1.svg';
 import './styles.css';
@@ -27,7 +26,7 @@ export default function Dashboard() {
                         </span>
                     </div>
                     <div className="gempeAirPlane">
-                        <img src={imgAirPlane} />
+                        <img src={imgAirPlane} alt="ImgAirPlane"/>
                     </div>
                 </div>
             </div>
