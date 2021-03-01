@@ -25,7 +25,7 @@
     justify-content: center; */
 }
 
-#buttonSearch {
+#buttonNew {
     background: #2A6BB9 0% 0% no-repeat padding-box;
     border-radius: 4px;
     height: 3rem;
@@ -44,8 +44,12 @@
     border-color: #B8B8B8;
 }
 
+.buttonModal {
+    margin-bottom: 15px !important;
+}
+
 @media(max-width: 1366px) {
-    #buttonSearch {
+    #buttonNew {
         width: 13.1%;
     }
 

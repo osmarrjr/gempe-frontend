@@ -36,12 +36,14 @@
     display: flex;
     justify-content: center;
     padding: 70px 0px 20px 0px;
+    margin-top: -20px;
 }
 
 .gempeLogo > img {
     margin-left: -1rem;
     width:  14.9rem;
     height: 4.4rem;
+    margin-top: -15px;
 }
 
 .spanInfo {
@@ -51,6 +53,7 @@
     font-size: 20px;
     font: normal normal normal 'Oxygen';
     width: 65vw;
+    margin-top: -15px;
 }
 
 .spanInfo > span {
@@ -65,8 +68,8 @@
 }
 
 .gempeAirPlane > img {
-    padding: 0;
-    margin-top: -14rem;
+    margin-top: -15rem;
+    height: 100vh;
 }
 
 @media(max-width: 1366px) {
@@ -98,21 +101,15 @@
 @media(min-width: 1920px) {
     .spanInfo {
         width:47vw;
+        margin-top: 20px;
     }
 
     .gempeAirPlane > img {
         padding: 0;
         margin-top: -20rem;
-        height: 100vh;
+    }
+
+    .gempeLogo {
+        margin-top: 10px;
     }
 }
-
-
-
-
-
-
-
-
-
-

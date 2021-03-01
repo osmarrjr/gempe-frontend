@@ -4,14 +4,15 @@ import Person from '../../assets/Mask Group 131.svg';
 import logoMenu from '../../assets/logoMenu.png';
 import helpIcon from '../../assets/help-icon.svg';
 import exitIcon from '../../assets/Mask Group 8.svg';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import { clearData } from '../../store/actions/user.actions';
 
 
 export default function DashboardMenu({ clickedDashboard = false , clickedInfo = false }) {
 
     const history = useHistory();
-
+    const dispatch = useDispatch();
     return (
        <div id="menuSidebar">
            <div className="containerMenu">
@@ -31,7 +32,10 @@ export default function DashboardMenu({ clickedDashboard = false , clickedInfo =
                    </div>
                </div>
 
-               <div onClick={() => history.push('/')} id="menuItem">
+               <div onClick={() => (
+                   dispatch(clearData()),
+                   history.push('/')
+               )} id="menuItem">
                     <img src={exitIcon} alt="Pes" />
                     <span>Sair</span>
 

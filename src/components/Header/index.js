@@ -12,11 +12,11 @@ export default function HeaderMenu(){
 
             <div className="itemsHeaderMenu">
                <Link to="/info"><img className="helpIconGrey" src={helpIconGrey} alt="Pes" /></Link>
-                <span>Olá, <strong> Osmar</strong></span>
+                <span>Olá, <strong> Rafael</strong></span>
             </div>
 
             <div className="marginHeader">
-                <Avatar size="large">O</Avatar>
+                <Avatar size="large">R</Avatar>
             </div>
             
         </div>

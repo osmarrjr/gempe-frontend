@@ -3,10 +3,13 @@ import SideBar from '../../components/SideBar';
 import HeaderMenu from '../../components/Header';
 import logo from '../../assets/logo@2x.png';
 import imgAirPlane from '../../assets/Layer 1.svg';
+import { useDispatch } from 'react-redux';
 import './styles.css';
-
+import { clearData } from '../../store/actions/user.actions';
+const airPlane = "../../assets/Layer 1.svg";
 export default function Dashboard() {
-    
+    const dispatch = useDispatch();
+    dispatch(clearData());
     return (
         <div className="container">
             <div className="menuDashboard">
