@@ -1,7 +1,7 @@
-# Getting Started with Create React App
+# Projeto realizado em ReactJs
 
-Projeto realizado em ReactJs
-
+Projeto desenvolvido como requisito de teste para vaga full stack na Gempe.
+ 
 ## Baixando o projeto
 
 Basta fazer o git clone para dentro da pasta que desejar
