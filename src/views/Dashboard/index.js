@@ -14,7 +14,7 @@ import { getContactsRequest,
 } from '../../store/actions/user.actions';
 import Swal from 'sweetalert2';
 import './styles.css';
-
+import { UserOutlined } from '@ant-design/icons';
 export default function Dashboard() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,6 +30,13 @@ export default function Dashboard() {
   const [filter, setFilter] = useState('');
 
   const screenHeight = window.innerHeight;
+
+  const mascaraTelefone = (valor) => {
+    valor = valor.replace(/\D/g, "")
+    valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2")
+    valor = valor.replace(/(\d)(\d{4})$/, "$1-$2")
+    setPhone(valor) // Insere o(s) valor(es) no campo
+}
 
   useEffect(() => {
     dispatch(getContactsRequest());
@@ -88,23 +95,41 @@ export default function Dashboard() {
   }
 
    function sendData() {
+    if(!name) {
+      Swal.fire('Atenção', 'Necessário informar um nome.', 'info');
+      return;
+    } else if(!email) {
+      Swal.fire('Atenção', 'Necessário informar um email.', 'info');
+      return;
+    } else if(!phone) {
+      Swal.fire('Atenção', 'Necessário informar um telefone.', 'info');
+      return;
+    }
+
+    if(email.includes('@') === false) {
+      Swal.fire('Atenção!', 'Email inválido, por favor digite novamente!', 'info');
+      return;
+    } 
+
     let data = {
       name, 
       email, 
       phone,
     }
-    if(isEditing) {
-       dispatch(editContactRequest(rowId, data));
-       setTimeout(() =>{
-        dispatch(getContactsRequest());
-       }, 500)
+
+    // if(isEditing) {
+    //    dispatch(editContactRequest(rowId, data));
+    //    setTimeout(() =>{
+    //     dispatch(getContactsRequest());
+    //    }, 500)
      
-    } else {
-      dispatch(addNewContactRequest(data));
-      setTimeout(() =>{
-        dispatch(getContactsRequest());
-       }, 1000)
-    }
+    // } else {
+    //   dispatch(addNewContactRequest(data));
+    //   setTimeout(() =>{
+    //     dispatch(getContactsRequest());
+    //    }, 1000)
+    // }
+
     clearData();
   }
 
@@ -178,7 +203,13 @@ export default function Dashboard() {
             <div className="cardDashboard">
                 <HeaderMenu />
                 <Row>
-                    <Input onKeyPress={(e) => e.charCode === 13 ? searchFilter() : ''} onChange={(e) => setFilter(e.target.value)} placeholder="Busca por nome ou email" id="inputSearch"/> 
+                    <Input 
+                      onKeyPress={(e) => e.charCode === 13 ? 
+                      searchFilter() : ''}
+                      onChange={(e) => setFilter(e.target.value)} 
+                      placeholder="Busca por nome ou email" 
+                      id="inputSearch"
+                    /> 
                     <Button onClick={() => addNewContact()} id="buttonNew">Novo</Button>
                 </Row>
                 <Table 
@@ -189,31 +220,58 @@ export default function Dashboard() {
                 />
             </div>
             <Modal
-              title={isEditing ? "Editar Usuário" : "Novo contato"}
+              title={isEditing ? <span className="spanModalTitle">Editar contato</span> : <span className="spanModalTitle">Novo contato</span>}
               onOk={()=>  (
-                sendData(name, email, phone)
+                // sendData(name, email, phone)
+                console.log('algo')
               )}
               visible={visible}
               onCancel={()=> (
                 clearData()
               )}
               footer={[
-                <Button type="primary" key="back" onClick={() =>  clearData()}>
-                  Cancelar
-                </Button>,
-                <Button key="submit" type="primary" onClick={() => sendData(name, email, phone)} >
-                  Salvar
-                </Button>,
+                <div className="buttonFooter">
+                  {isEditing ?
+                  <Button type="primary" key="back" onClick={() =>  clearData()}>
+                    Salvar
+                  </Button> :
+                  <Button key="submit" type="primary" onClick={() => sendData(name, email, phone)} >
+                    Criar
+                  </Button>
+                  }
+                </div>,
               ]}
             >
-              <div>
-                  <span>Nome </span>
-                <Input className="buttonModal" onChange={(e) => setName(e.target.value) } value={name}/>
-                  <span> Email </span>
-                <Input className="buttonModal" onChange={(e) => setEmail(e.target.value)} value={email}/>
-                  <span> Telefone  </span>
-                <Input className="buttonModal" onChange={(e) => setPhone(e.target.value)} value={phone}/>
-
+              <div className="modalContent">
+                  <div className="divModalSpan">
+                    <span>Nome </span>
+                  </div>
+                <input 
+                  placeholder="Digite o nome" 
+                  className="buttonModal" 
+                  onChange={(e) => setName(e.target.value) } 
+                  value={name}
+                />
+                  <div className="divModalSpan">
+                    <span>Email </span>
+                  </div>
+                <input 
+                  placeholder="Digite o email" 
+                  className="buttonModal" 
+                  onChange={(e) => setEmail(e.target.value)} 
+                  value={email}
+                />
+                  <div className="divModalSpan">
+                    <span>Telefone</span>
+                  </div>
+                <input 
+                  placeholder="Digite o telefone" 
+                  type="text"
+                  className="buttonModal" 
+                  maxLength="15"
+                  onChange={(e) => mascaraTelefone(e.target.value)}
+                  value={phone}
+                />
               </div>
             </Modal>
         </div>
